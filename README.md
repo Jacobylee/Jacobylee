@@ -1,5 +1,6 @@
 - 👋 Hi, I’m @Jacobylee
-- 👀 I’m interested in NLP, Ruby On Rails, Python
+- 🖥 Devote to Product Manager
+- 👀 I’m interested in NLP, JavaScript, Python
 - 🌱 I’m currently learning NLP
 - 📫 How to reach me jacobli@brandeis.edu
 
