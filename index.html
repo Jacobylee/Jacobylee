@@ -131,9 +131,6 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
   .food-grid { grid-template-columns: 1fr; }
 }
 
-/* Toast */
-.xhs-toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: rgba(0,0,0,0.78); color: #fff; padding: 10px 22px; border-radius: 22px; font-size: 0.88em; z-index: 9999; opacity: 0; transition: all 0.3s ease; pointer-events: none; white-space: nowrap; }
-.xhs-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
@@ -209,7 +206,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
       <div class="tl-body">
         <h4>🍕 Pizza 4P's</h4>
         <p>胡志明口碑最好的披萨店，招牌 Shrimp Pizza 和 Four Cheese Pizza，面饼薄脆用料扎实。人均 15–25 万盾。Grab 到 Park Hyatt 寄存行李后步行 5 分钟。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明Pizza4Ps')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看评价</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看评价</a>
       </div>
     </div>
   </div>
@@ -222,7 +219,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
       <div class="tl-body">
         <h4>📮 西贡中央邮局</h4>
         <p>黄色殖民建筑，1891 年建成，全亚洲最美的邮局之一。进去寄一张明信片给彼此。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明中央邮局打卡')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看攻略</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看攻略</a>
       </div>
     </div>
   </div>
@@ -235,7 +232,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
       <div class="tl-body">
         <h4>☕ 咖啡公寓 42 Nguyen Hue</h4>
         <p>阮惠步行街旁的老公寓楼，每层都是不同风格的咖啡馆和买手店，逐层逛上去，顶楼视野最好。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明咖啡公寓42 Nguyen Hue')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看攻略</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看攻略</a>
       </div>
     </div>
   </div>
@@ -247,7 +244,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
       <div class="tl-body">
         <h4>🥚 鸡蛋咖啡制作体验课</h4>
         <p>约 2 小时，涵盖 4 种经典越南咖啡冲泡方法，招牌鸡蛋咖啡（Ca Phe Trung）——蛋黄加炼乳打发后铺在咖啡上，绵密香醇。课程含品鉴和配方，Klook 预订，人均约 20–30 万盾。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明鸡蛋咖啡课')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看体验</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看体验</a>
       </div>
     </div>
   </div>
@@ -260,7 +257,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
       <div class="tl-body">
         <h4>🚌 双层敞篷观光巴士</h4>
         <p>City Sightseeing 巴士覆盖第一郡主要景点，上层露天座位视野极佳。傍晚班次正好看到日落时的西贡。票价约 20 万盾/人（24 小时票），Klook 提前购买。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明双层观光巴士')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看攻略</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看攻略</a>
       </div>
     </div>
   </div>
@@ -274,7 +271,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
         <h4>🌃 阮惠步行街散步</h4>
         <p>沿阮惠步行街（Nguyen Hue Walking Street）慢慢走，整条街灯火通明，有街头表演。走到尽头的西贡河岸边吹吹风、看看夜景，第一天的完美收尾。</p>
         <p style="margin-top:6px;font-size:0.85em;color:#999;">散步结束后回 Park Hyatt 入住休息。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明阮惠步行街')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看夜景</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看夜景</a>
       </div>
     </div>
   </div>
@@ -296,7 +293,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
       <div class="tl-body">
         <h4>🏛️ 战争博物馆</h4>
         <p>War Remnants Museum, 28 Vo Van Tan。门票 4 万盾（约 12 元），展出越战历史照片、军事装备和影像资料。内容沉重但非常值得一看。预留 2 小时。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明战争博物馆攻略')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看攻略</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看攻略</a>
       </div>
     </div>
   </div>
@@ -309,7 +306,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
       <div class="tl-body">
         <h4>🥖 Banh Mi Huynh Hoa</h4>
         <p>38 Nguyen Cu, D1。胡志明最有名的法棍三明治，几十年老店。面包外酥内软，夹满各种肉类和肝酱，一个约 3.5 万盾，两人分一个就够，料非常足。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明Banh Mi Huynh Hoa法棍')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看测评</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看测评</a>
       </div>
     </div>
   </div>
@@ -322,7 +319,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
       <div class="tl-body">
         <h4>🏢 统一宫</h4>
         <p>Reunification Palace, 135 Nam Ky Khoi Nghia。南越总统府旧址，1975 年北越坦克撞开大门的画面是越南统一的标志。建筑是 60 年代现代主义风格，内部保留了当年的宴会厅、作战室和屋顶直升机停机坪。门票 4 万盾，预留 1.5 小时。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明统一宫打卡')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看攻略</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看攻略</a>
       </div>
     </div>
   </div>
@@ -334,7 +331,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
       <div class="tl-body">
         <h4>🍜 晚间美食团 Food Tour</h4>
         <p>摩托车美食之旅或步行版，一晚吃 5–7 家地道小馆，从煎饼到蜗牛到甜品，边吃边逛边听故事。人均约 40–60 万盾，3–4 小时。Klook 提前预订。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明美食团street food tour')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看推荐</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看推荐</a>
       </div>
     </div>
   </div>
@@ -357,7 +354,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
       <div class="tl-body">
         <h4>👨‍🍳 越南手作料理烹饪课</h4>
         <p>Provincial Table Cooking Class，Klook 预订，约 171 元/人。先去本地菜市场认识越南食材，回厨房在厨师指导下做 4–5 道经典越南菜（春卷、河粉、煎饼、蘸酱等），一起享用自己做的午餐，获赠 25 道越南传统料理食谱手册。全程 3–4 小时。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明越南烹饪课Provincial Table')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看体验</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看体验</a>
       </div>
     </div>
   </div>
@@ -369,7 +366,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
       <div class="tl-body">
         <h4>💆 双人 Spa 按摩</h4>
         <p>犒劳这几天走累的腿。推荐 Miumiu Spa 或 Hera Spa（D1），越式全身按摩 60 分钟约 30–50 万盾/人，双人房可一起按。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明spa按摩推荐')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看推荐</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看推荐</a>
       </div>
     </div>
   </div>
@@ -394,7 +391,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
         <h4>🎭 AO Show — 西贡歌剧院</h4>
         <p>Lune Production 制作的越南竹马戏，被称为"越南版太阳剧团"。融合杂技、当代舞蹈、戏剧动作和现场音乐，用竹竿、竹篮、扁担等道具，从田园乡村演绎到繁华都市，视觉效果震撼。演出约 60 分钟。</p>
         <p>票价约 63–158 万越南盾，Klook 购票，建议提前订票选中间区域座位。</p>
-        <span class="xhs-link" onclick="openXHS('胡志明AO Show竹马戏')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看评价</span>
+        <a class="xhs-link"<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg> 小红书看评价</a>
       </div>
     </div>
   </div>
@@ -496,15 +493,5 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
 <p class="footer">祝你们西贡之旅浪漫愉快！Chuc cac ban di vui ve!</p>
 
 </div>
-<div id="xhsToast" class="xhs-toast"></div>
-<script>
-function openXHS(kw) {
-  navigator.clipboard.writeText(kw).catch(function(){});
-  var t = document.getElementById('xhsToast');
-  t.textContent = '已复制「' + kw + '」，去小红书搜索吧';
-  t.classList.add('show');
-  setTimeout(function(){ t.classList.remove('show'); }, 2500);
-}
-</script>
 </body>
 </html>
