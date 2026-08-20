@@ -499,24 +499,11 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
 <div id="xhsToast" class="xhs-toast"></div>
 <script>
 function openXHS(kw) {
-  var opened = false;
-  function onHide() { opened = true; document.removeEventListener('visibilitychange', onHide); }
-  document.addEventListener('visibilitychange', onHide);
-  var f = document.createElement('iframe');
-  f.src = 'xhsdiscover://search?keyword=' + encodeURIComponent(kw);
-  f.style.display = 'none';
-  document.body.appendChild(f);
-  setTimeout(function() {
-    document.removeEventListener('visibilitychange', onHide);
-    document.body.removeChild(f);
-    if (!opened) {
-      var t = document.getElementById('xhsToast');
-      t.textContent = '请在小红书APP搜索: ' + kw;
-      t.classList.add('show');
-      setTimeout(function(){ t.classList.remove('show'); }, 3000);
-      navigator.clipboard.writeText(kw).catch(function(){});
-    }
-  }, 1500);
+  navigator.clipboard.writeText(kw).catch(function(){});
+  var t = document.getElementById('xhsToast');
+  t.textContent = '已复制「' + kw + '」，去小红书搜索吧';
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2500);
 }
 </script>
 </body>
