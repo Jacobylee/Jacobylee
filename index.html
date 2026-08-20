@@ -499,15 +499,7 @@ header .dates { display: inline-block; background: rgba(255,255,255,0.2); border
 <div id="xhsToast" class="xhs-toast"></div>
 <script>
 function openXHS(kw) {
-  navigator.clipboard.writeText(kw).catch(function(){});
-  var t = document.getElementById('xhsToast');
-  t.textContent = '\u5DF2\u590D\u5236\u300C' + kw + '\u300D\uFF0C\u6B63\u5728\u6253\u5F00\u5C0F\u7EA2\u4E66...';
-  t.classList.add('show');
-  setTimeout(function(){ t.classList.remove('show'); }, 2200);
-  setTimeout(function(){
-    window.location.href = 'xhsdiscover://search?keyword=' + encodeURIComponent(kw);
-    setTimeout(function(){ window.open('https://www.xiaohongshu.com/explore?keyword=' + encodeURIComponent(kw), '_blank'); }, 600);
-  }, 300);
+  window.open('https://www.xiaohongshu.com/search_result?keyword=' + encodeURIComponent(kw) + '&source=web_search_result_notes', '_blank');
 }
 </script>
 </body>
