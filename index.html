@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>胡志明市情侣旅游攻略</title>
+<style>
+:root {
+  --red: #c0392b;
+  --red-light: #e74c3c;
+  --bg: #f5f0eb;
+  --card: #fff;
+  --text: #333;
+  --text-light: #777;
+  --border: #f0e6df;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --day1: #e74c3c;
+  --day2: #2980b9;
+  --day3: #8e44ad;
+  --day4: #27ae60;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+/* Header */
+header { background: linear-gradient(135deg, #c0392b 0%, #e74c3c 50%, #f39c12 100%); color: #fff; padding: 36px 20px 28px; text-align: center; position: relative; overflow: hidden; }
+header::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); }
+header h1 { font-size: 1.7em; font-weight: 700; position: relative; }
+header p { font-size: 0.95em; opacity: 0.9; margin-top: 4px; position: relative; }
+header .dates { display: inline-block; background: rgba(255,255,255,0.2); border-radius: 20px; padding: 4px 16px; margin-top: 10px; font-size: 0.85em; position: relative; }
+
+/* Container */
+.container { max-width: 640px; margin: 0 auto; padding: 0 12px 40px; }
+
+/* Section cards */
+.section-card { background: var(--card); border-radius: 16px; margin-top: 14px; padding: 18px; box-shadow: var(--shadow); }
+.section-card h2 { font-size: 1.15em; color: var(--red); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+
+/* Checklist */
+.checklist { list-style: none; padding: 0; }
+.checklist li { padding: 10px 12px; margin-bottom: 6px; background: #fdf8f5; border-radius: 10px; font-size: 0.92em; display: flex; align-items: flex-start; gap: 8px; border: 1px solid #f5ebe5; }
+.checklist li::before { content: '☐'; color: var(--red); font-weight: bold; font-size: 1.1em; flex-shrink: 0; }
+.checklist li a { color: var(--red); text-decoration: underline; }
+
+/* Items list */
+.items-list { list-style: none; padding: 0; }
+.items-list li { padding: 8px 0; font-size: 0.92em; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+.items-list li:last-child { border-bottom: none; }
+.items-list li .icon { font-size: 1.2em; }
+
+/* Overview table */
+.overview-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.85em; margin: 10px 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+.overview-table th { background: var(--border); padding: 10px 8px; text-align: left; font-weight: 600; color: #555; }
+.overview-table td { padding: 10px 8px; border-top: 1px solid var(--border); vertical-align: top; }
+.overview-table tr:nth-child(even) { background: #fdf8f5; }
+
+/* Day header */
+.day-header { border-radius: 16px; padding: 16px 18px; margin: 20px 0 4px; color: #fff; position: relative; overflow: hidden; }
+.day-header::after { content: ''; position: absolute; top: 0; right: 0; width: 80px; height: 100%; background: rgba(255,255,255,0.1); border-radius: 0 16px 16px 0; }
+.day-header h3 { font-size: 1.1em; margin: 0; }
+.day-header p { font-size: 0.85em; opacity: 0.85; margin-top: 2px; }
+.day1 { background: linear-gradient(135deg, var(--day1), #e57373); }
+.day2 { background: linear-gradient(135deg, var(--day2), #5dade2); }
+.day3 { background: linear-gradient(135deg, var(--day3), #af7ac5); }
+.day4 { background: linear-gradient(135deg, var(--day4), #58d68d); }
+
+/* Timeline */
+.timeline { position: relative; padding-left: 28px; margin: 8px 0 0; }
+.timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 3px; border-radius: 2px; }
+.timeline.day1-line::before { background: linear-gradient(to bottom, var(--day1), #e57373); }
+.timeline.day2-line::before { background: linear-gradient(to bottom, var(--day2), #5dade2); }
+.timeline.day3-line::before { background: linear-gradient(to bottom, var(--day3), #af7ac5); }
+.timeline.day4-line::before { background: linear-gradient(to bottom, var(--day4), #58d68d); }
+
+.timeline-item { position: relative; margin-bottom: 16px; }
+.timeline-item::before { content: ''; position: absolute; left: -22px; top: 14px; width: 12px; height: 12px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--dot-color, var(--red)); z-index: 1; }
+.timeline-item.day1-dot { --dot-color: var(--day1); }
+.timeline-item.day2-dot { --dot-color: var(--day2); }
+.timeline-item.day3-dot { --dot-color: var(--day3); }
+.timeline-item.day4-dot { --dot-color: var(--day4); }
+
+.timeline-item::after { content: ''; position: absolute; left: -10px; top: 19px; width: 10px; height: 2px; background: var(--dot-color, var(--red)); opacity: 0.4; }
+
+.tl-card { background: var(--card); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; border: 1px solid rgba(0,0,0,0.04); }
+.tl-card .time-tag { display: inline-block; font-size: 0.75em; font-weight: 600; padding: 3px 10px; border-radius: 0 0 10px 0; color: #fff; }
+.tl-card .time-tag.day1-tag { background: var(--day1); }
+.tl-card .time-tag.day2-tag { background: var(--day2); }
+.tl-card .time-tag.day3-tag { background: var(--day3); }
+.tl-card .time-tag.day4-tag { background: var(--day4); }
+
+.tl-img { width: 100%; height: 160px; object-fit: cover; display: block; background: #f0e6df; }
+.tl-body { padding: 12px 14px; }
+.tl-body h4 { font-size: 1em; margin-bottom: 6px; color: var(--text); }
+.tl-body p { font-size: 0.88em; color: #555; margin-bottom: 6px; }
+.tl-body .xhs-link { display: inline-flex; align-items: center; gap: 4px; font-size: 0.8em; color: #ff2442; background: #fff0f0; padding: 4px 10px; border-radius: 14px; text-decoration: none; margin-top: 4px; border: 1px solid #ffd6d6; }
+.tl-body .xhs-link:active { background: #ffe0e0; }
+.tl-body .xhs-link svg { width: 14px; height: 14px; fill: #ff2442; }
+
+.tl-text-only { padding: 12px 14px; }
+.tl-text-only h4 { font-size: 0.95em; margin-bottom: 4px; }
+.tl-text-only p { font-size: 0.88em; color: #555; }
+
+/* Tip box */
+.tip-box { background: linear-gradient(135deg, #fef9e7, #fdebd0); border-left: 4px solid #f39c12; border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 12px 0; font-size: 0.85em; color: #7d5a2e; }
+
+/* Food/table */
+.data-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.82em; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin: 8px 0; }
+.data-table th { background: var(--border); padding: 8px 6px; text-align: left; font-weight: 600; }
+.data-table td { padding: 8px 6px; border-top: 1px solid var(--border); }
+.data-table tr:nth-child(even) { background: #fdf8f5; }
+
+/* Tips */
+.tips-list { list-style: none; padding: 0; }
+.tips-list li { padding: 10px 0; font-size: 0.88em; border-bottom: 1px solid var(--border); }
+.tips-list li:last-child { border-bottom: none; }
+.tips-list li strong { color: var(--red); }
+
+.footer { text-align: center; padding: 28px 0 12px; color: #aaa; font-size: 0.85em; }
+
+/* Image grid for food section */
+.food-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
+.food-item { border-radius: 10px; overflow: hidden; background: var(--card); box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.04); }
+.food-item img { width: 100%; height: 100px; object-fit: cover; display: block; background: #f0e6df; }
+.food-item .food-info { padding: 8px 10px; }
+.food-item .food-info h5 { font-size: 0.85em; margin-bottom: 2px; }
+.food-item .food-info span { font-size: 0.75em; color: var(--text-light); }
+
+@media (max-width: 380px) {
+  header h1 { font-size: 1.4em; }
+  .tl-img { height: 140px; }
+  .food-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>胡志明市情侣旅游攻略</h1>
+  <p>两人浪漫西贡之旅</p>
+  <div class="dates">8.29（周五）– 9.1（周一）</div>
+</header>
+
+<div class="container">
+
+<!-- 行前准备 -->
+<div class="section-card">
+  <h2>📋 行前准备</h2>
+  <ul class="checklist">
+    <li>护照</li>
+    <li>越南电子签（打印确认页随身带）</li>
+    <li>入境卡（<a href="https://prearrival.immigration.gov.vn/apps/submit-document" target="_blank">在线填写</a>）</li>
+    <li>越南电话卡</li>
+    <li>换汇（国内换 500 RMB）</li>
+    <li>预订体验项目（均在 Klook）：鸡蛋咖啡课、观光巴士、晚间美食团、烹饪课、AO Show 门票</li>
+  </ul>
+</div>
+
+<!-- 随身物品 -->
+<div class="section-card">
+  <h2>🎒 随身物品</h2>
+  <ul class="items-list">
+    <li><span class="icon">🧴</span> 防晒霜 + 墨镜 + 帽子（紫外线很强）</li>
+    <li><span class="icon">🦟</span> 防蚊喷雾</li>
+    <li><span class="icon">🔌</span> 转换插头：越南用 A/C/O 型插座，国内两脚扁插可直接用，三脚需要转换器</li>
+  </ul>
+</div>
+
+<!-- 行程概览 -->
+<div class="section-card">
+  <h2>🗓️ 行程概览</h2>
+  <table class="overview-table">
+    <tr><th>日期</th><th>主题</th><th>住宿</th></tr>
+    <tr><td>8/29 周五</td><td>初见西贡</td><td>Wink → Park Hyatt</td></tr>
+    <tr><td>8/30 周六</td><td>历史与烟火气</td><td>Park Hyatt</td></tr>
+    <tr><td>8/31 周日</td><td>越南味道 & 歌剧院</td><td>Park Hyatt</td></tr>
+    <tr><td>9/1 周一</td><td>返程</td><td>—</td></tr>
+  </table>
+  <div class="tip-box">☔ 8 月底属胡志明雨季，午后常有短时暴雨（30 分钟–1 小时），室外行程尽量上午，下午灵活应变。气温 26–33°C。</div>
+</div>
+
+<!-- ==================== DAY 1 ==================== -->
+<div class="day-header day1">
+  <h3>Day 1 · 8/29 周五</h3>
+  <p>初见西贡</p>
+</div>
+
+<div class="timeline day1-line">
+
+  <!-- 上午到达 -->
+  <div class="timeline-item day1-dot">
+    <div class="tl-card">
+      <span class="time-tag day1-tag">上午</span>
+      <div class="tl-text-only">
+        <h4>✈️ 到达 & 休整</h4>
+        <p>CZ6089 凌晨落地新山一机场，Grab 到 Wink Saigon（114 Cong Quynh, D1），车程约 20 分钟。拉好遮光窗帘补觉，别睡过午饭。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pizza 4P's -->
+  <div class="timeline-item day1-dot">
+    <div class="tl-card">
+      <span class="time-tag day1-tag">午餐</span>
+      <img class="tl-img" src="http://qcloud.dpfile.com/pc/hWHAahJF0unk7awo5UpqKBOrycA646CSKjaUGfH-O07xV3YSXqLArYwJ4DwrCodA.jpg" alt="Pizza 4P's" onerror="this.style.display='none'">
+      <div class="tl-body">
+        <h4>🍕 Pizza 4P's</h4>
+        <p>胡志明口碑最好的披萨店，招牌 Shrimp Pizza 和 Four Cheese Pizza，面饼薄脆用料扎实。人均 15–25 万盾。Grab 到 Park Hyatt 寄存行李后步行 5 分钟。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明Pizza4Ps&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看评价
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 中央邮局 -->
+  <div class="timeline-item day1-dot">
+    <div class="tl-card">
+      <span class="time-tag day1-tag">14:00</span>
+      <img class="tl-img" src="http://hellorfimg.zcool.cn/large/569125765.jpg" alt="西贡中央邮局" onerror="this.style.display='none'">
+      <div class="tl-body">
+        <h4>📮 西贡中央邮局</h4>
+        <p>黄色殖民建筑，1891 年建成，全亚洲最美的邮局之一。进去寄一张明信片给彼此。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明中央邮局打卡&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看攻略
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 咖啡公寓 -->
+  <div class="timeline-item day1-dot">
+    <div class="tl-card">
+      <span class="time-tag day1-tag">14:30</span>
+      <img class="tl-img" src="http://dimg04.c-ctrip.com/images/1me0d12000r6tl7230893_R_640_10000_Q90.jpg?proc=source/tripcommunity" alt="咖啡公寓" onerror="this.style.display='none'">
+      <div class="tl-body">
+        <h4>☕ 咖啡公寓 42 Nguyen Hue</h4>
+        <p>阮惠步行街旁的老公寓楼，每层都是不同风格的咖啡馆和买手店，逐层逛上去，顶楼视野最好。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明咖啡公寓42 Nguyen Hue&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看攻略
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 鸡蛋咖啡课 -->
+  <div class="timeline-item day1-dot">
+    <div class="tl-card">
+      <span class="time-tag day1-tag">15:30</span>
+      <div class="tl-body">
+        <h4>🥚 鸡蛋咖啡制作体验课</h4>
+        <p>约 2 小时，涵盖 4 种经典越南咖啡冲泡方法，招牌鸡蛋咖啡（Ca Phe Trung）——蛋黄加炼乳打发后铺在咖啡上，绵密香醇。课程含品鉴和配方，Klook 预订，人均约 20–30 万盾。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明鸡蛋咖啡课&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看体验
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 双层观光巴士 -->
+  <div class="timeline-item day1-dot">
+    <div class="tl-card">
+      <span class="time-tag day1-tag">17:30</span>
+      <img class="tl-img" src="http://res.klook.com/image/upload/w_750,h_469,c_fill,q_85/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/x7hjwbyof064yghzmmlw.jpg" alt="双层观光巴士" onerror="this.style.display='none'">
+      <div class="tl-body">
+        <h4>🚌 双层敞篷观光巴士</h4>
+        <p>City Sightseeing 巴士覆盖第一郡主要景点，上层露天座位视野极佳。傍晚班次正好看到日落时的西贡。票价约 20 万盾/人（24 小时票），Klook 提前购买。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明双层观光巴士&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看攻略
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 阮惠步行街 -->
+  <div class="timeline-item day1-dot">
+    <div class="tl-card">
+      <span class="time-tag day1-tag">夜晚</span>
+      <img class="tl-img" src="http://q6.itc.cn/images01/20240922/e93236e3f9df465f989fb3ff5782ecaa.jpeg" alt="阮惠步行街夜景" onerror="this.style.display='none'">
+      <div class="tl-body">
+        <h4>🌃 阮惠步行街散步</h4>
+        <p>沿阮惠步行街（Nguyen Hue Walking Street）慢慢走，整条街灯火通明，有街头表演。走到尽头的西贡河岸边吹吹风、看看夜景，第一天的完美收尾。</p>
+        <p style="margin-top:6px;font-size:0.85em;color:#999;">散步结束后回 Park Hyatt 入住休息。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明阮惠步行街&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看夜景
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== DAY 2 ==================== -->
+<div class="day-header day2">
+  <h3>Day 2 · 8/30 周六</h3>
+  <p>历史与烟火气</p>
+</div>
+
+<div class="timeline day2-line">
+
+  <!-- 战争博物馆 -->
+  <div class="timeline-item day2-dot">
+    <div class="tl-card">
+      <span class="time-tag day2-tag">9:30</span>
+      <div class="tl-body">
+        <h4>🏛️ 战争博物馆</h4>
+        <p>War Remnants Museum, 28 Vo Van Tan。门票 4 万盾（约 12 元），展出越战历史照片、军事装备和影像资料。内容沉重但非常值得一看。预留 2 小时。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明战争博物馆攻略&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看攻略
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Banh Mi -->
+  <div class="timeline-item day2-dot">
+    <div class="tl-card">
+      <span class="time-tag day2-tag">午餐</span>
+      <img class="tl-img" src="http://qcloud.dpfile.com/pc/gYznx_7wYIuLqLCwn3omPPocOez9yZLsGhhs74wbpwm_TOUZCrAX6NrOvEbJjyUTK-l1dfmC-sNXFHV2eRvcw.jpg" alt="Banh Mi Huynh Hoa" onerror="this.style.display='none'">
+      <div class="tl-body">
+        <h4>🥖 Banh Mi Huynh Hoa</h4>
+        <p>38 Nguyen Cu, D1。胡志明最有名的法棍三明治，几十年老店。面包外酥内软，夹满各种肉类和肝酱，一个约 3.5 万盾，两人分一个就够，料非常足。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明Banh Mi Huynh Hoa法棍&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看测评
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 统一宫 -->
+  <div class="timeline-item day2-dot">
+    <div class="tl-card">
+      <span class="time-tag day2-tag">下午</span>
+      <img class="tl-img" src="http://hellorfimg.zcool.cn/large/644102236.jpg" alt="统一宫" onerror="this.style.display='none'">
+      <div class="tl-body">
+        <h4>🏢 统一宫</h4>
+        <p>Reunification Palace, 135 Nam Ky Khoi Nghia。南越总统府旧址，1975 年北越坦克撞开大门的画面是越南统一的标志。建筑是 60 年代现代主义风格，内部保留了当年的宴会厅、作战室和屋顶直升机停机坪。门票 4 万盾，预留 1.5 小时。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明统一宫打卡&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看攻略
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 美食团 -->
+  <div class="timeline-item day2-dot">
+    <div class="tl-card">
+      <span class="time-tag day2-tag">18:00</span>
+      <div class="tl-body">
+        <h4>🍜 晚间美食团 Food Tour</h4>
+        <p>摩托车美食之旅或步行版，一晚吃 5–7 家地道小馆，从煎饼到蜗牛到甜品，边吃边逛边听故事。人均约 40–60 万盾，3–4 小时。Klook 提前预订。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明美食团street food tour&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看推荐
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== DAY 3 ==================== -->
+<div class="day-header day3">
+  <h3>Day 3 · 8/31 周日</h3>
+  <p>越南味道 & 歌剧院之夜</p>
+</div>
+
+<div class="timeline day3-line">
+
+  <!-- 烹饪课 -->
+  <div class="timeline-item day3-dot">
+    <div class="tl-card">
+      <span class="time-tag day3-tag">9:00–13:00</span>
+      <img class="tl-img" src="http://hellorfimg.zcool.cn/large/588467648.jpg" alt="越南烹饪课" onerror="this.style.display='none'">
+      <div class="tl-body">
+        <h4>👨‍🍳 越南手作料理烹饪课</h4>
+        <p>Provincial Table Cooking Class，Klook 预订，约 171 元/人。先去本地菜市场认识越南食材，回厨房在厨师指导下做 4–5 道经典越南菜（春卷、河粉、煎饼、蘸酱等），一起享用自己做的午餐，获赠 25 道越南传统料理食谱手册。全程 3–4 小时。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明越南烹饪课Provincial Table&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看体验
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spa -->
+  <div class="timeline-item day3-dot">
+    <div class="tl-card">
+      <span class="time-tag day3-tag">14:30–16:30</span>
+      <div class="tl-body">
+        <h4>💆 双人 Spa 按摩</h4>
+        <p>犒劳这几天走累的腿。推荐 Miumiu Spa 或 Hera Spa（D1），越式全身按摩 60 分钟约 30–50 万盾/人，双人房可一起按。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明spa按摩推荐&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看推荐
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 晚餐 -->
+  <div class="timeline-item day3-dot">
+    <div class="tl-card">
+      <span class="time-tag day3-tag">17:30</span>
+      <div class="tl-text-only">
+        <h4>🍽️ 晚餐</h4>
+        <p>在 Park Hyatt 附近用晚餐，保持轻松节奏。推荐 Xu Restaurant（Park Hyatt 内，高端越南菜，人均 80–150 万盾），或附近随便找一家吃简单点，把期待留给演出后的宵夜。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- AO Show -->
+  <div class="timeline-item day3-dot">
+    <div class="tl-card">
+      <span class="time-tag day3-tag">20:00</span>
+      <img class="tl-img" src="http://gallery.youxiake.com/product/202505/20/1747730007390rUlrQ.jpg?imageMogr2/quality/85/format/webp" alt="AO Show 竹马戏" onerror="this.style.display='none'">
+      <div class="tl-body">
+        <h4>🎭 AO Show — 西贡歌剧院</h4>
+        <p>Lune Production 制作的越南竹马戏，被称为"越南版太阳剧团"。融合杂技、当代舞蹈、戏剧动作和现场音乐，用竹竿、竹篮、扁担等道具，从田园乡村演绎到繁华都市，视觉效果震撼。演出约 60 分钟。</p>
+        <p>票价约 63–158 万越南盾，Klook 购票，建议提前订票选中间区域座位。</p>
+        <a class="xhs-link" href="https://www.xiaohongshu.com/search_result?keyword=胡志明AO Show竹马戏&source=web_search_link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          小红书看评价
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 宵夜 -->
+  <div class="timeline-item day3-dot">
+    <div class="tl-card">
+      <span class="time-tag day3-tag">~21:30</span>
+      <div class="tl-text-only">
+        <h4>🌙 宵夜</h4>
+        <p>散场后去 Bui Vien 区域或阮惠步行街找一家小馆子，一碗热河粉或一份法棍三明治，给这个夜晚画句号。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== DAY 4 ==================== -->
+<div class="day-header day4">
+  <h3>Day 4 · 9/1 周一</h3>
+  <p>返程</p>
+</div>
+
+<div class="timeline day4-line">
+
+  <div class="timeline-item day4-dot">
+    <div class="tl-card">
+      <span class="time-tag day4-tag">上午</span>
+      <div class="tl-text-only">
+        <h4>🏊 酒店时光 & 最后一逛</h4>
+        <p>享受 Park Hyatt 的泳池早餐。如果还有购物需求，酒店附近商场最后逛一圈，或去便利店买越南特产（G7 咖啡、椰子糖、腰果都很适合做手信）。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-item day4-dot">
+    <div class="tl-card">
+      <span class="time-tag day4-tag">午餐</span>
+      <div class="tl-text-only">
+        <h4>🍜 最后一碗河粉</h4>
+        <p>推荐 Pho Mien Ga Ky Dong（29 Nguyen Trung Truc, D3），本地人最爱的河粉店。或者 Pho Le（41-43-45 Nguyen An Ninh），都是胡志明河粉天花板。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-item day4-dot">
+    <div class="tl-card">
+      <span class="time-tag day4-tag">下午</span>
+      <div class="tl-text-only">
+        <h4>✈️ 前往机场</h4>
+        <p>提前 2.5–3 小时到机场。Grab 到新山一机场国际航站楼约 20–30 分钟。机场不大，过关有时排队，留够时间。免税店最后买一波越南咖啡和巧克力。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== 美食清单 ==================== -->
+<div class="section-card">
+  <h2>🍴 美食清单速查</h2>
+  <table class="data-table">
+    <tr><th>餐厅</th><th>类型</th><th>人均</th><th>推荐菜</th></tr>
+    <tr><td>Pizza 4P's</td><td>披萨</td><td>15–25万盾</td><td>鲜虾披萨、四芝士</td></tr>
+    <tr><td>Banh Mi Huynh Hoa</td><td>法棍</td><td>3.5万盾</td><td>全家福法棍</td></tr>
+    <tr><td>Xu Restaurant</td><td>高端越南菜</td><td>80–150万盾</td><td>越南体验套餐</td></tr>
+    <tr><td>Pho Le</td><td>越南河粉</td><td>5–8万盾</td><td>牛肉河粉</td></tr>
+    <tr><td>Pho Mien Ga Ky Dong</td><td>越南河粉</td><td>4–6万盾</td><td>牛肉河粉</td></tr>
+    <tr><td>美食团</td><td>街头小吃</td><td>40–60万盾</td><td>一晚吃 5–7 家</td></tr>
+  </table>
+</div>
+
+<!-- ==================== 体验项目 ==================== -->
+<div class="section-card">
+  <h2>🎫 体验项目预订清单（均 Klook）</h2>
+  <table class="data-table">
+    <tr><th>项目</th><th>时长</th><th>人均费用</th></tr>
+    <tr><td>鸡蛋咖啡制作课</td><td>约 2h</td><td>20–30万盾</td></tr>
+    <tr><td>双层观光巴士</td><td>约 1h</td><td>20万盾（24h票）</td></tr>
+    <tr><td>晚间美食团</td><td>3–4h</td><td>40–60万盾</td></tr>
+    <tr><td>越南烹饪课</td><td>3–4h</td><td>约 171 元</td></tr>
+    <tr><td>AO Show</td><td>约 60min</td><td>63–158万盾</td></tr>
+  </table>
+</div>
+
+<!-- ==================== 实用 Tips ==================== -->
+<div class="section-card">
+  <h2>💡 实用 Tips</h2>
+  <ul class="tips-list">
+    <li><strong>防骗：</strong>Grab 打车永远比路边拦出租车靠谱。街头有人热情搭讪推荐"便宜一日游"的大概率是骗子，礼貌拒绝。</li>
+    <li><strong>砍价：</strong>Ben Thanh 市场和路边摊贩开价通常是实价的 2–3 倍，对半砍再往上加一点。商场和餐厅明码标价不用砍。</li>
+    <li><strong>小费：</strong>越南没有强制小费文化，但 Spa、高档餐厅给 5–10% 小费会被 appreciated。</li>
+    <li><strong>饮水：</strong>不要喝自来水，酒店和餐厅都提供瓶装水或过滤水。</li>
+    <li><strong>安全：</strong>第一郡旅游区总体安全，但注意飞车抢包（尤其手机），走路时包背在靠内侧，不要边走边看手机。</li>
+    <li><strong>汇率：</strong>ATM 取现汇率最好。避免机场换汇柜台，市区金店（如 Ha Tam Jewelry）换汇汇率也不错。</li>
+    <li><strong>雨天备案：</strong>遇到暴雨就钻进商场、咖啡馆或博物馆，等雨停了再出来，越南的雨来得快去得也快。</li>
+  </ul>
+</div>
+
+<p class="footer">祝你们西贡之旅浪漫愉快！Chuc cac ban di vui ve!</p>
+
+</div>
+</body>
+</html>
