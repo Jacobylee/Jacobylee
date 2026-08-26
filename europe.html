@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 欧洲之旅 · 出游计划</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+    background: #f0f2f5;
+    color: #1a1a2e;
+    line-height: 1.6;
+    padding-bottom: 60px;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 20px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: 0; right: 0;
+    height: 40px;
+    background: #f0f2f5;
+    border-radius: 50% 50% 0 0;
+  }
+  .header h1 { font-size: 28px; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; }
+  .header .subtitle { font-size: 14px; opacity: 0.85; letter-spacing: 1px; }
+  .route-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
+  .route-badge {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container { max-width: 920px; margin: 0 auto; padding: 10px 16px 0; }
+
+  /* ===== SECTION DIVIDER ===== */
+  .section-divider {
+    text-align: center;
+    padding: 24px 0 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #bbb;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* ===== DAY CARD ===== */
+  .day-card {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: visible;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    grid-template-rows: 1fr auto;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+  .day-card:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(0,0,0,0.09); }
+  .day-card.pending { opacity: 0.6; }
+  .day-card.expanded,
+  .day-card:hover { z-index: 10; }
+
+  /* ===== COLLAPSE TOGGLE ===== */
+  .collapse-btn {
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 26px; height: 26px;
+    border: none;
+    background: rgba(0,0,0,0.05);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #999;
+    transition: transform 0.25s, background 0.2s;
+    z-index: 5;
+  }
+  .collapse-btn:hover { background: rgba(0,0,0,0.1); }
+  .collapse-btn .arrow {
+    display: inline-block;
+    transition: transform 0.25s;
+  }
+  .day-card.collapsed .collapse-btn .arrow {
+    transform: rotate(-90deg);
+  }
+
+  /* ===== COLLAPSIBLE BODY ===== */
+  .right-panel {
+    transition: max-height 0.3s ease, opacity 0.25s ease;
+    overflow: visible;
+  }
+  .day-card.collapsed .right-panel {
+    max-height: 0 !important;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+  }
+  .day-card.collapsed .accom-bar {
+    max-height: 0;
+    opacity: 0;
+    padding: 0 20px;
+    overflow: hidden;
+  }
+
+  /* ===== LEFT PANEL ===== */
+  .left-panel {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .left-panel::after {
+    content: '';
+    position: absolute;
+    top: 16px; right: 0; bottom: 0;
+    width: 1px;
+    background: #eee;
+  }
+  .day-num-badge { display: flex; align-items: center; gap: 10px; }
+  .day-num {
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 13px; color: white;
+    flex-shrink: 0;
+  }
+  .day-date { font-size: 12px; color: #999; font-weight: 500; }
+  .day-title { font-size: 14px; font-weight: 700; margin-top: 2px; line-height: 1.4; }
+  .city-flag {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 10px;
+    margin-top: 4px; white-space: nowrap;
+    align-self: flex-start;
+  }
+  .city-flag .flag { font-size: 13px; }
+
+  /* Local transport in left panel */
+  .left-transport {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px dashed #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .transport-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: #f5f6fa; border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 11px; font-weight: 600; color: #555;
+    white-space: nowrap;
+  }
+
+  /* City Colors */
+  .city-guangzhou .left-panel { background: #f5f9f5; }
+  .city-guangzhou .day-num { background: linear-gradient(135deg, #27ae60, #1e8449); }
+  .city-guangzhou .city-flag { background: #e8f5e9; color: #1b5e20; }
+
+  .city-cph .left-panel { background: #fef5f5; }
+  .city-cph .day-num { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+  .city-cph .city-flag { background: #fde8e8; color: #b71c1c; }
+
+  .city-malmo .left-panel { background: #f0f6fd; }
+  .city-malmo .day-num { background: linear-gradient(135deg, #005293, #003d73); }
+  .city-malmo .city-flag { background: #e3f0fc; color: #005293; }
+
+  .city-nice .left-panel { background: #f0f7ff; }
+  .city-nice .day-num { background: linear-gradient(135deg, #0984e3, #0652DD); }
+  .city-nice .city-flag { background: #e3f2fd; color: #0984e3; }
+
+  .city-monaco .left-panel { background: #fdf0f0; }
+  .city-monaco .day-num { background: linear-gradient(135deg, #c62828, #8e0000); }
+  .city-monaco .city-flag { background: #fce4ec; color: #c62828; }
+
+  .city-antibes .left-panel { background: #fef8ee; }
+  .city-antibes .day-num { background: linear-gradient(135deg, #f39c12, #e67e22); }
+  .city-antibes .city-flag { background: #fff8e1; color: #e65100; }
+
+  .city-paris .left-panel { background: #f5f6f8; }
+  .city-paris .day-num { background: linear-gradient(135deg, #2c3e50, #1a252f); }
+  .city-paris .city-flag { background: #eceff1; color: #2c3e50; }
+
+  .city-bkk .left-panel { background: #fef6ee; }
+  .city-bkk .day-num { background: linear-gradient(135deg, #e67e22, #d35400); }
+  .city-bkk .city-flag { background: #fff3e0; color: #e65100; }
+
+  /* ===== RIGHT PANEL (Schedule) ===== */
+  .right-panel {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 14px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Time Slot Row */
+  .slot {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid #f5f5f5;
+    align-items: start;
+  }
+  .slot:last-child { border-bottom: none; }
+  .slot-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding-top: 2px;
+    text-align: right;
+  }
+  .slot-label.morning { color: #e67e22; }
+  .slot-label.lunch { color: #27ae60; }
+  .slot-label.afternoon { color: #2980b9; }
+  .slot-label.dinner { color: #8e44ad; }
+  .slot-label.evening { color: #7f8c8d; }
+  .slot-label.allday { color: #3498db; }
+  .slot-label.travel { color: #95a5a6; }
+
+  .slot-content {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.65;
+  }
+  .slot-content.empty {
+    color: #ccc;
+    font-style: italic;
+    font-size: 12px;
+  }
+
+  /* Flight tag in right panel */
+  .flight-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: #eef5ff; border: 1px solid #d4e3ff;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 11px; font-weight: 600; color: #2c5aa0;
+    margin: 2px 0;
+    white-space: nowrap;
+  }
+
+  /* ===== TOOLTIP ===== */
+  .spot {
+    font-weight: 600;
+    color: #2c3e50;
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dashed #bbb;
+    white-space: nowrap;
+  }
+  .spot .tip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    background: #2c3e50;
+    color: #ecf0f1;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.55;
+    padding: 10px 12px;
+    border-radius: 8px;
+    z-index: 9999;
+    pointer-events: none;
+    transition: opacity 0.2s, visibility 0.2s;
+    white-space: normal;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .spot .tip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #2c3e50;
+  }
+  .spot:hover .tip { visibility: visible; opacity: 1; }
+
+  /* Pending content */
+  .pending-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    color: #ccc;
+    font-size: 13px;
+    font-weight: 500;
+    gap: 8px;
+  }
+  .pending-right .pending-icon { font-size: 22px; }
+
+  /* ===== ACCOMMODATION BAR ===== */
+  .accom-bar {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    background: #fafbfc;
+    border-top: 1px solid #eee;
+    padding: 9px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s;
+  }
+  .accom-bar .accom-icon { font-size: 14px; flex-shrink: 0; }
+  .accom-bar .accom-label {
+    font-weight: 700; color: #999;
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 32px;
+  }
+  .accom-bar .accom-item { display: flex; align-items: center; gap: 4px; }
+  .accom-bar .accom-name { font-weight: 600; color: #555; }
+  .accom-bar .accom-hotel { color: #333; }
+  .accom-bar .accom-tbd { color: #ccc; font-style: italic; }
+  .accom-sep { color: #ddd; }
+
+  /* ===== COLLAPSED SUMMARY ===== */
+  .collapsed-summary {
+    display: none;
+    grid-column: 2;
+    grid-row: 1;
+    padding: 14px 20px;
+    font-size: 12px;
+    color: #999;
+    align-items: center;
+  }
+  .day-card.collapsed .collapsed-summary { display: flex; }
+  .day-card.collapsed .right-panel { display: none; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .header { padding: 30px 16px 24px; }
+    .header h1 { font-size: 20px; letter-spacing: 1px; }
+    .header .subtitle { font-size: 12px; }
+    .route-badges { gap: 6px; margin-top: 12px; }
+    .route-badge { font-size: 11px; padding: 3px 10px; }
+
+    .container { padding: 8px 8px 0; }
+
+    .day-card {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+      margin-bottom: 10px;
+    }
+    .left-panel {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 12px;
+    }
+    .left-panel::after { display: none; }
+    .left-transport {
+      margin-top: 0; padding-top: 0; border-top: none;
+      flex-direction: row; flex-wrap: wrap; gap: 6px; width: 100%;
+    }
+    .right-panel { padding: 8px 12px; }
+
+    /* Stack slot label above content on mobile */
+    .slot {
+      grid-template-columns: 1fr;
+      gap: 2px;
+      padding: 8px 0;
+    }
+    .slot-label {
+      font-size: 11px;
+      padding: 0;
+    }
+    .slot-content {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .flight-tag {
+      font-size: 10px;
+      padding: 2px 6px;
+    }
+
+    .accom-bar {
+      padding: 8px 12px;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .accom-item { font-size: 12px; }
+
+    .collapsed-summary { grid-column: 1; padding: 10px 12px; font-size: 12px; }
+
+    .collapse-btn {
+      width: 32px; height: 32px;
+      font-size: 14px;
+    }
+
+    .spot .tip { width: 200px; left: 0; transform: none; font-size: 11px; }
+    .spot .tip::after { left: 20px; transform: none; }
+
+    .section-divider { font-size: 13px; margin: 16px 0 8px; }
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .header { background: #667eea !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .day-card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+    .day-card:hover { transform: none; }
+    .collapse-btn { display: none; }
+    .day-card.collapsed .right-panel,
+    .day-card.collapsed .accom-bar { max-height: none !important; opacity: 1 !important; display: flex !important; padding: auto !important; }
+    .collapsed-summary { display: none !important; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<div class="header">
+  <h1>2026 欧洲之旅</h1>
+  <div class="subtitle">9.24 — 10.8 · 广州出发</div>
+  <div class="route-badges">
+    <span class="route-badge">🇩🇰 哥本哈根</span>
+    <span class="route-badge">🇸🇪 马尔默</span>
+    <span class="route-badge">🇫🇷 尼斯</span>
+    <span class="route-badge">🇲🇨 摩纳哥</span>
+    <span class="route-badge">🇫🇷 昂蒂布</span>
+    <span class="route-badge">🇫🇷 巴黎</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ==================== 出发前 ==================== -->
+<div class="section-divider">🛫 出发前</div>
+
+<!-- DAY -1: 9/24 -->
+<div class="day-card city-guangzhou">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D-1</div>
+      <div>
+        <div class="day-date">9月24日 · 周四</div>
+        <div class="day-title">上海 → 广州</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">✈️ 国内航班</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="slot">
+      <div class="slot-label travel">航班</div>
+      <div class="slot-content">
+        <span class="flight-tag">✈️ AQ1006 · 23:10–01:00</span> 上海 → 广州（约2h30m）
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-label evening">晚上</div>
+      <div class="slot-content">
+        深夜航班从上海飞广州，凌晨01:00抵达，前往住处休息
+      </div>
+    </div>
+  </div>
+  <div class="collapsed-summary">✈️ AQ1006 · 23:10 上海 → 广州 · 01:00 抵达</div>
+</div>
+
+<!-- DAY 0: 9/25 -->
+<div class="day-card city-guangzhou">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D0</div>
+      <div>
+        <div class="day-date">9月25日 · 周五</div>
+        <div class="day-title">广州 · 收拾行李</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">🏠 在家</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="slot">
+      <div class="slot-label morning">上午</div>
+      <div class="slot-content">在家收拾行李，准备欧洲之行</div>
+    </div>
+    <div class="slot">
+      <div class="slot-label afternoon">下午</div>
+      <div class="slot-content">继续整理行李，检查护照、签证、机票等重要文件</div>
+    </div>
+    <div class="slot">
+      <div class="slot-label evening">晚上</div>
+      <div class="slot-content">前往白云机场 T1，搭乘 TG679 飞往曼谷</div>
+    </div>
+    <div class="slot">
+      <div class="slot-label travel">航班</div>
+      <div class="slot-content">
+        <span class="flight-tag">✈️ TG679 · 21:05–23:05</span> 广州 CAN T1 → 曼谷 BKK（2h）
+      </div>
+    </div>
+  </div>
+  <div class="collapsed-summary">🏠 收拾行李 · ✈️ TG679 · 21:05 CAN→BKK</div>
+</div>
+
+<!-- ==================== 丹麦 · 哥本哈根 ==================== -->
+<div class="section-divider">🇩🇰 丹麦 · 哥本哈根</div>
+
+<!-- DAY 1: 9/26 -->
+<div class="day-card city-cph">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D1</div>
+      <div>
+        <div class="day-date">9月26日 · 周六</div>
+        <div class="day-title">抵达 · 历史与运河</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">🚇 市内公共交通</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="slot">
+      <div class="slot-label travel">航班</div>
+      <div class="slot-content">
+        <span class="flight-tag">✈️ TG950 · 01:10–07:40</span> 曼谷 BKK → 哥本哈根 CPH（10h30m）
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-label morning">上午</div>
+      <div class="slot-content">
+        07:40 抵达哥本哈根，前往酒店 check-in / 寄存行李。然后去<span class="spot">腓特烈堡花园<span class="tip">腓特烈堡花园（Frederiksberg Have）：哥本哈根市中心西侧的皇家花园，内有湖、孔雀和幽静小径，适合散步放空。</span></span>散步，有湖有孔雀，适合两个人慢慢晃。
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-label afternoon">下午</div>
+      <div class="slot-content">
+        去<span class="spot">丹麦国家博物馆<span class="tip">丹麦国家博物馆（Nationalmuseet）：丹麦最大的文化历史博物馆，馆藏维京银器、格陵兰木船和王室藏品，系统展示从石器时代到现代的丹麦历史。</span></span>，看维京银器和王室藏品。然后去<span class="spot">克里斯钦港区<span class="tip">克里斯钦港区（Christianshavn）：哥本哈根最古老的城区之一，建于17世纪，运河两岸排列着彩色木屋，氛围安静文艺。</span></span>，沿运河看彩色木屋，爬上<span class="spot">救主堂螺旋尖塔<span class="tip">救主堂（Vor Frelsers Kirke）：巴洛克风格教堂，外部有400级螺旋台阶通往塔顶，360度俯瞰哥本哈根全城，是城市最佳观景点之一。</span></span>看全景。
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-label evening">晚上</div>
+      <div class="slot-content">
+        <span class="spot">趣伏里公园<span class="tip">趣伏里公园（Tivoli Gardens）：1843年开放的游乐园，比迪士尼早近一百年。坐落在中央火车站对面，有复古木质过山车、旋转木马、花圃喷泉和中式宝塔剧院。傍晚百万盏装饰灯点亮，氛围格外浪漫，本地人买年票夏天来听露天音乐会。</span></span>，灯光亮起来之后很浪漫。
+      </div>
+    </div>
+  </div>
+  <div class="collapsed-summary">✈️ TG950 抵达 · 腓特烈堡花园 → 国家博物馆 → 克里斯钦港区 → 救主堂 → 趣伏里公园</div>
+  <div class="accom-bar">
+    <span class="accom-icon">🏨</span>
+    <span class="accom-label">住宿</span>
+    <span class="accom-item"><span class="accom-name">Jacob & Audrey</span> <span class="accom-hotel">Cabinn City 卡賓城市酒店（趣伏里周边）</span></span>
+  </div>
+</div>
+
+<!-- DAY 2: 9/27 -->
+<div class="day-card city-cph">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D2</div>
+      <div>
+        <div class="day-date">9月27日 · 周日</div>
+        <div class="day-title">经典环线</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">🚶 步行 + 公共交通</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="slot">
+      <div class="slot-label morning">上午</div>
+      <div class="slot-content">
+        从<span class="spot">新港 Nyhavn<span class="tip">新港（Nyhavn）：哥本哈根标志性景点，运河两岸排列着17-18世纪的彩色木屋，安徒生曾在此居住。如今停满木船，两岸遍布餐厅和咖啡馆。</span></span>开始，沿彩色小屋运河边走，步行到<span class="spot">阿美琳堡宫<span class="tip">阿美琳堡宫（Amalienborg Slot）：丹麦王室的冬季官邸，由四栋相同的洛可可宫殿围成八角形广场。每天中午12点有王家卫队换岗仪式。</span></span>，赶上12点王家卫队换岗。之后沿海滨步道去看<span class="spot">小美人鱼雕像<span class="tip">小美人鱼（Den Lille Havfrue）：根据安徒生童话《海的女儿》创作的青铜雕像，1913年立于长堤公园，是哥本哈根最著名的地标之一。</span></span>。
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-label lunch">午饭</div>
+      <div class="slot-content">新港附近餐厅</div>
+    </div>
+    <div class="slot">
+      <div class="slot-label afternoon">下午</div>
+      <div class="slot-content">
+        登上<span class="spot">圆塔<span class="tip">圆塔（Rundetaarn）：建于1642年，欧洲最古老的天文台之一。内部没有楼梯，而是一条268米的螺旋坡道通往顶部观景台，可俯瞰哥本哈根老城。</span></span>看全城，顺路逛<span class="spot">斯托罗里耶步行街 Strøget<span class="tip">斯托罗里耶步行街（Strøget）：欧洲最长步行街之一，从市政厅广场到国王新广场约1.1公里，汇集国际快时尚到北欧设计品牌，也有街头艺人和露天咖啡座。</span></span>。
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-label dinner">晚饭</div>
+      <div class="slot-content">
+        <span class="spot">托尔伏港食品市场<span class="tip">托尔伏港食品市场（Torvehallerne）：哥本哈根市中心最大的室内美食市场，分两个大厅，汇集丹麦本地奶酪、海鲜、熟食、甜品和各国小吃。</span></span>，摊位多选择多，三个人一起吃刚刚好。
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-label evening">晚上</div>
+      <div class="slot-content empty">待完成</div>
+    </div>
+  </div>
+  <div class="collapsed-summary">新港 → 阿美琳堡宫 → 小美人鱼 → 圆塔 → Strøget → Torvehallerne</div>
+  <div class="accom-bar">
+    <span class="accom-icon">🏨</span>
+    <span class="accom-label">住宿</span>
+    <span class="accom-item"><span class="accom-name">Jacob</span> <span class="accom-hotel">Cabinn City 卡賓城市酒店</span></span>
+    <span class="accom-sep">|</span>
+    <span class="accom-item"><span class="accom-name">Audrey</span> <span class="accom-hotel">Urtehaven Valby</span></span>
+  </div>
+</div>
+
+<!-- ==================== 瑞典 · 马尔默 → 🇫🇷 尼斯 ==================== -->
+<div class="section-divider">🇸🇪 瑞典 · 马尔默</div>
+
+<!-- DAY 3: 9/28 -->
+<div class="day-card city-malmo">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D3</div>
+      <div>
+        <div class="day-date">9月28日 · 周一</div>
+        <div class="day-title">马尔默一日游</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">🚆 火车</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="slot">
+      <div class="slot-label morning">上午</div>
+      <div class="slot-content">
+        <span class="flight-tag">🚆 火车 · 10:30</span> 哥本哈根 → 马尔默（约40min）
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-label lunch">午饭</div>
+      <div class="slot-content">
+        <span class="spot">Lilla Torg<span class="tip">Lilla Torg（小广场）：马尔默老城最迷人的广场之一，铺着鹅卵石，周围环绕着半木结构的老建筑，密布咖啡馆和餐厅，是享用 brunch 的绝佳地点。</span></span> brunch
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-label afternoon">下午</div>
+      <div class="slot-content">
+        <span class="spot">Gamla Staden 大广场<span class="tip">Gamla Staden（老城）：马尔默中世纪城区核心，大广场（Stortorget）建于1590年代，是瑞典最古老的广场之一，周围有市政厅和圣彼得教堂。</span></span>、<span class="spot">马尔默城堡<span class="tip">马尔默城堡（Malmöhus Castle）：北欧现存最古老的文艺复兴城堡，建于15世纪，内含艺术博物馆、水族馆和自然历史展览。</span></span>、<span class="spot">国王公园<span class="tip">国王公园（Kungsparken）：马尔默市中心最大的公园，建于1872年，有运河、草坪和古树，适合散步休憩。</span></span>，然后去<span class="spot">旋转中心 Turning Torso<span class="tip">旋转中心（Turning Torso）：西班牙建筑师卡拉特拉瓦设计的扭转摩天大楼，高190米，是瑞典最高建筑。位于西港区海边，造型如扭转的人体，极具视觉冲击力。</span></span>，坐在海边发呆。
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-label evening">晚上</div>
+      <div class="slot-content">
+        返回哥本哈根
+      </div>
+    </div>
+  </div>
+  <div class="collapsed-summary">🚆 火车 → 马尔默游览 → 返回哥本哈根</div>
+  <div class="accom-bar">
+    <span class="accom-icon">🏨</span>
+    <span class="accom-label">住宿</span>
+    <span class="accom-item"><span class="accom-name">Jacob</span> <span class="accom-hotel">Cabinn City 卡賓城市酒店</span></span>
+    <span class="accom-sep">|</span>
+    <span class="accom-item"><span class="accom-name">Audrey</span> <span class="accom-hotel">Urtehaven Valby</span></span>
+  </div>
+</div>
+
+<!-- ==================== 南法 · 尼斯 ==================== -->
+<div class="section-divider">🇫🇷 南法 · 尼斯</div>
+
+<!-- DAY 4: 9/29 -->
+<div class="day-card city-nice">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D4</div>
+      <div>
+        <div class="day-date">9月29日 · 周二</div>
+        <div class="day-title">哥本哈根 → 尼斯</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">✈️ D83640 抵达尼斯</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="slot">
+      <div class="slot-label travel">航班</div>
+      <div class="slot-content">
+        <span class="flight-tag">✈️ D83640 · 10:30–12:50</span> 哥本哈根 CPH → 尼斯 NCE（2h20m）
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-label afternoon">下午</div>
+      <div class="slot-content empty">抵达尼斯，入住酒店</div>
+    </div>
+    <div class="slot">
+      <div class="slot-label evening">晚上</div>
+      <div class="slot-content empty">天使湾 / 老城 / 城堡山</div>
+    </div>
+  </div>
+  <div class="collapsed-summary">✈️ D83640 · 10:30 CPH→NCE · 抵达尼斯</div>
+  <div class="accom-bar">
+    <span class="accom-icon">🏨</span>
+    <span class="accom-label">住宿</span>
+    <span class="accom-item"><span class="accom-name">Jacob & Audrey</span> <span class="accom-tbd">待完成</span></span>
+  </div>
+</div>
+
+<!-- DAY 5: 9/30 -->
+<div class="day-card city-nice pending">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D5</div>
+      <div>
+        <div class="day-date">9月30日 · 周三</div>
+        <div class="day-title">尼斯</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">🚗 交通待完成</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="pending-right">
+      <span class="pending-icon">🌊</span>
+      行程待完成 · 尼斯 / 周边小镇
+    </div>
+  </div>
+  <div class="collapsed-summary">行程待完成</div>
+  <div class="accom-bar">
+    <span class="accom-icon">🏨</span>
+    <span class="accom-label">住宿</span>
+    <span class="accom-item"><span class="accom-name">Jacob & Audrey</span> <span class="accom-tbd">待完成</span></span>
+  </div>
+</div>
+
+<!-- ==================== 摩纳哥 ==================== -->
+<div class="section-divider">🇲🇨 摩纳哥</div>
+
+<!-- DAY 6: 10/1 -->
+<div class="day-card city-monaco pending">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D6</div>
+      <div>
+        <div class="day-date">10月1日 · 周四</div>
+        <div class="day-title">摩纳哥</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">🚗 交通待完成</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="pending-right">
+      <span class="pending-icon">🎰</span>
+      行程待完成 · 蒙特卡洛 / 王宫 / 海洋博物馆
+    </div>
+  </div>
+  <div class="collapsed-summary">行程待完成</div>
+  <div class="accom-bar">
+    <span class="accom-icon">🏨</span>
+    <span class="accom-label">住宿</span>
+    <span class="accom-item"><span class="accom-name">Jacob & Audrey</span> <span class="accom-tbd">待完成</span></span>
+  </div>
+</div>
+
+<!-- ==================== 南法 · 昂蒂布 ==================== -->
+<div class="section-divider">🇫🇷 南法 · 昂蒂布</div>
+
+<!-- DAY 7: 10/2 -->
+<div class="day-card city-antibes pending">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D7</div>
+      <div>
+        <div class="day-date">10月2日 · 周五</div>
+        <div class="day-title">昂蒂布</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">🚗 交通待完成</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="pending-right">
+      <span class="pending-icon">🏰</span>
+      行程待完成 · 老城 / 毕加索博物馆 / 海角
+    </div>
+  </div>
+  <div class="collapsed-summary">行程待完成</div>
+  <div class="accom-bar">
+    <span class="accom-icon">🏨</span>
+    <span class="accom-label">住宿</span>
+    <span class="accom-item"><span class="accom-name">Jacob & Audrey</span> <span class="accom-hotel">昂蒂布（待定）</span></span>
+  </div>
+</div>
+
+<!-- DAY 8: 10/3 -->
+<div class="day-card city-antibes pending">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D8</div>
+      <div>
+        <div class="day-date">10月3日 · 周六</div>
+        <div class="day-title">昂蒂布</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">✈️ TO7145 飞巴黎</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="slot">
+      <div class="slot-label travel">航班</div>
+      <div class="slot-content">
+        <span class="flight-tag">✈️ TO7145 · 19:10–20:40</span> 尼斯 NCE → 巴黎（1h30m）
+      </div>
+    </div>
+    <div class="pending-right">
+      <span class="pending-icon">🎨</span>
+      行程待完成 · 昂蒂布 / 戛纳 / 格拉斯
+    </div>
+  </div>
+  <div class="collapsed-summary">行程待完成 · ✈️ TO7145 19:10 飞巴黎</div>
+  <div class="accom-bar">
+    <span class="accom-icon">🏨</span>
+    <span class="accom-label">住宿</span>
+    <span class="accom-item"><span class="accom-name">Jacob & Audrey</span> <span class="accom-hotel">Hotel Littéraire le Swann</span></span>
+  </div>
+</div>
+
+<!-- ==================== 北法 · 巴黎 ==================== -->
+<div class="section-divider">🇫🇷 北法 · 巴黎</div>
+
+<!-- DAY 9: 10/4 -->
+<div class="day-card city-paris pending">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D9</div>
+      <div>
+        <div class="day-date">10月4日 · 周日</div>
+        <div class="day-title">巴黎</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">🚇 市内交通</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="pending-right">
+      <span class="pending-icon">🗼</span>
+      行程待完成 · 巴黎市区
+    </div>
+  </div>
+  <div class="collapsed-summary">行程待完成</div>
+  <div class="accom-bar">
+    <span class="accom-icon">🏨</span>
+    <span class="accom-label">住宿</span>
+    <span class="accom-item"><span class="accom-name">Jacob & Audrey</span> <span class="accom-hotel">Hotel Littéraire le Swann</span></span>
+  </div>
+</div>
+
+<!-- DAY 10: 10/5 -->
+<div class="day-card city-paris pending">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D10</div>
+      <div>
+        <div class="day-date">10月5日 · 周一</div>
+        <div class="day-title">巴黎</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">🚇 市内交通</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="pending-right">
+      <span class="pending-icon">🎭</span>
+      行程待完成 · 巴黎市区 / 凡尔赛
+    </div>
+  </div>
+  <div class="collapsed-summary">行程待完成</div>
+  <div class="accom-bar">
+    <span class="accom-icon">🏨</span>
+    <span class="accom-label">住宿</span>
+    <span class="accom-item"><span class="accom-name">Jacob & Audrey</span> <span class="accom-hotel">Hotel Littéraire le Swann</span></span>
+  </div>
+</div>
+
+<!-- DAY 11: 10/6 -->
+<div class="day-card city-paris pending">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D11</div>
+      <div>
+        <div class="day-date">10月6日 · 周二</div>
+        <div class="day-title">巴黎</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">🚇 市内交通</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="pending-right">
+      <span class="pending-icon">🎭</span>
+      行程待完成 · 巴黎市区
+    </div>
+  </div>
+  <div class="collapsed-summary">行程待完成</div>
+  <div class="accom-bar">
+    <span class="accom-icon">🏨</span>
+    <span class="accom-label">住宿</span>
+    <span class="accom-item"><span class="accom-name">Jacob & Audrey</span> <span class="accom-hotel">Hotel Littéraire le Swann</span></span>
+  </div>
+</div>
+
+<!-- ==================== 回程 ==================== -->
+<div class="section-divider">✈️ 回程 · 曼谷</div>
+
+<!-- DAY 12: 10/7 -->
+<div class="day-card city-paris">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D12</div>
+      <div>
+        <div class="day-date">10月7日 · 周三</div>
+        <div class="day-title">巴黎 → 曼谷</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">✈️ CDG→BKK</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="slot">
+      <div class="slot-label morning">上午</div>
+      <div class="slot-content">前往戴高乐机场 T1，办理退税和登机手续</div>
+    </div>
+    <div class="slot">
+      <div class="slot-label afternoon">下午</div>
+      <div class="slot-content">
+        <span class="flight-tag">✈️ TG931 · 13:40–05:55+1</span> 巴黎 CDG T1 → 曼谷 BKK（12h15m）
+      </div>
+    </div>
+  </div>
+  <div class="collapsed-summary">✈️ TG931 · 13:40 CDG T1→BKK · 05:55+1</div>
+</div>
+
+<!-- DAY 13: 10/8 -->
+<div class="day-card city-bkk">
+  <button class="collapse-btn" onclick="toggleCard(this)"><span class="arrow">▼</span></button>
+  <div class="left-panel" onclick="toggleCardFromLeft(this)">
+    <div class="day-num-badge">
+      <div class="day-num">D13</div>
+      <div>
+        <div class="day-date">10月8日 · 周四</div>
+        <div class="day-title">曼谷 → 广州 → 上海</div>
+      </div>
+    </div>
+    <div class="left-transport">
+      <span class="transport-tag">✈️ BKK→CAN</span>
+      <span class="transport-tag">✈️ CAN→PVG</span>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="slot">
+      <div class="slot-label morning">上午</div>
+      <div class="slot-content">
+        <span class="flight-tag">✈️ TG668 · 10:30–14:30</span> 曼谷 BKK → 广州 CAN T2（3h）
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-label afternoon">下午</div>
+      <div class="slot-content">TG668 · 10:30 起飞 → 14:30 抵达广州白云 T2</div>
+    </div>
+    <div class="slot">
+      <div class="slot-label evening">晚上</div>
+      <div class="slot-content">
+        <span class="flight-tag">✈️ AQ1005 · 18:45–21:20</span> 广州 CAN T2 → 上海浦东 PVG T2（2h35m）
+      </div>
+    </div>
+  </div>
+  <div class="collapsed-summary">✈️ TG668 · 10:30 BKK→CAN · 14:30 + AQ1005 · 18:45 CAN→PVG · 21:20</div>
+</div>
+
+<div style="text-align:center; padding:24px 0 0; color:#ccc; font-size:12px;">
+  Last updated: 2026-08-26
+</div>
+
+</div><!-- /container -->
+
+<script>
+function toggleCard(btn) {
+  const card = btn.closest('.day-card');
+  card.classList.toggle('collapsed');
+  document.querySelectorAll('.day-card').forEach(c => {
+    if (c !== card) c.classList.remove('expanded');
+  });
+  if (!card.classList.contains('collapsed')) {
+    card.classList.add('expanded');
+  }
+}
+function toggleCardFromLeft(panel) {
+  const card = panel.closest('.day-card');
+  card.classList.toggle('collapsed');
+  document.querySelectorAll('.day-card').forEach(c => {
+    if (c !== card) c.classList.remove('expanded');
+  });
+  if (!card.classList.contains('collapsed')) {
+    card.classList.add('expanded');
+  }
+}
+</script>
+</body>
+</html>
