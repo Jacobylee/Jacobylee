@@ -364,71 +364,117 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 640px) {
-    .header { padding: 30px 16px 24px; }
+    .header { padding: 24px 14px 20px; }
     .header h1 { font-size: 20px; letter-spacing: 1px; }
     .header .subtitle { font-size: 12px; }
-    .route-badges { gap: 6px; margin-top: 12px; }
+    .route-badges { gap: 6px; margin-top: 10px; }
     .route-badge { font-size: 11px; padding: 3px 10px; }
 
-    .container { padding: 8px 8px 0; }
+    .container { padding: 6px 6px 0; }
 
     .day-card {
       grid-template-columns: 1fr;
       grid-template-rows: auto auto auto;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      overflow: hidden;
     }
+
+    /* Left panel: vertical stack on mobile */
     .left-panel {
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 12px;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      gap: 6px;
+      padding: 12px 14px;
     }
     .left-panel::after { display: none; }
-    .left-transport {
-      margin-top: 0; padding-top: 0; border-top: none;
-      flex-direction: row; flex-wrap: wrap; gap: 6px; width: 100%;
-    }
-    .right-panel { padding: 8px 12px; }
+    .day-num-badge { gap: 8px; }
+    .day-num { width: 30px; height: 30px; font-size: 12px; border-radius: 8px; }
+    .day-date { font-size: 11px; }
+    .day-title { font-size: 13px; margin-top: 1px; }
+    .city-flag { font-size: 10px; padding: 2px 8px; margin-top: 2px; }
 
-    /* Stack slot label above content on mobile */
+    /* Transport tags: horizontal row */
+    .left-transport {
+      margin-top: 2px; padding-top: 6px;
+      border-top: 1px dashed #eee;
+      flex-direction: row; flex-wrap: wrap; gap: 4px;
+      width: 100%;
+    }
+    .transport-tag { font-size: 10px; padding: 2px 6px; }
+
+    /* Right panel */
+    .right-panel { padding: 8px 14px 10px; }
+
+    /* Slot: label above content */
     .slot {
       grid-template-columns: 1fr;
-      gap: 2px;
-      padding: 8px 0;
+      gap: 1px;
+      padding: 7px 0;
     }
     .slot-label {
-      font-size: 11px;
+      font-size: 10px;
       padding: 0;
+      text-align: left;
     }
     .slot-content {
       font-size: 13px;
-      line-height: 1.5;
+      line-height: 1.55;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     .flight-tag {
       font-size: 10px;
       padding: 2px 6px;
+      margin: 2px 4px 2px 0;
     }
 
+    /* Pending area */
+    .pending-right { padding: 16px 10px; font-size: 12px; }
+    .pending-right .pending-icon { font-size: 18px; }
+
+    /* Accommodation bar */
     .accom-bar {
-      padding: 8px 12px;
+      padding: 8px 14px;
       flex-wrap: wrap;
-      gap: 4px;
+      gap: 4px 8px;
+      font-size: 11px;
     }
-    .accom-item { font-size: 12px; }
+    .accom-bar .accom-icon { font-size: 12px; }
+    .accom-bar .accom-label { font-size: 9px; }
+    .accom-bar .accom-name { font-size: 11px; }
+    .accom-bar .accom-hotel { font-size: 11px; }
 
-    .collapsed-summary { grid-column: 1; padding: 10px 12px; font-size: 12px; }
+    /* Collapsed summary */
+    .collapsed-summary { grid-column: 1; padding: 10px 14px; font-size: 11px; }
 
+    /* Collapse button */
     .collapse-btn {
-      width: 32px; height: 32px;
-      font-size: 14px;
+      width: 30px; height: 30px;
+      font-size: 13px;
+      top: 8px; right: 8px;
     }
 
-    .spot .tip { width: 200px; left: 0; transform: none; font-size: 11px; }
-    .spot .tip::after { left: 20px; transform: none; }
+    /* Tooltip: show on tap, position safely */
+    .spot { white-space: normal; border-bottom: 1px dashed #ccc; }
+    .spot .tip {
+      position: fixed;
+      bottom: 10px; left: 10px; right: 10px;
+      top: auto;
+      width: auto;
+      transform: none;
+      font-size: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      z-index: 9999;
+    }
+    .spot .tip::after { display: none; }
+    .spot:active .tip { visibility: visible; opacity: 1; }
+    .spot:hover .tip { visibility: visible; opacity: 1; }
 
-    .section-divider { font-size: 13px; margin: 16px 0 8px; }
+    .section-divider { font-size: 12px; margin: 14px 0 6px; letter-spacing: 2px; }
   }
 
   /* ===== PRINT ===== */
