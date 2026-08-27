@@ -365,120 +365,170 @@
   .day-card.collapsed .collapsed-summary { display: flex; }
   .day-card.collapsed .right-panel { display: none; }
 
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 640px) {
-    .header { padding: 24px 14px 20px; }
-    .header h1 { font-size: 20px; letter-spacing: 1px; }
-    .header .subtitle { font-size: 12px; }
-    .route-badges { gap: 6px; margin-top: 10px; }
-    .route-badge { font-size: 11px; padding: 3px 10px; }
-
-    .container { padding: 6px 6px 0; }
+  /* ===== RESPONSIVE — JS-driven via .mobile-view class ===== */
+  @media (max-width: 768px) {
+    .header { padding: 24px 14px 20px !important; }
+    .header h1 { font-size: 20px !important; letter-spacing: 1px !important; }
+    .header .subtitle { font-size: 12px !important; }
+    .route-badges { gap: 6px !important; margin-top: 10px !important; }
+    .route-badge { font-size: 11px !important; padding: 3px 10px !important; }
+    .container { padding: 6px 6px 0 !important; }
 
     .day-card {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto auto;
-      margin-bottom: 8px;
-      border-radius: 12px;
-      overflow: hidden;
+      grid-template-columns: 1fr !important;
+      grid-template-rows: auto auto auto !important;
+      margin-bottom: 8px !important;
+      border-radius: 12px !important;
+      overflow: hidden !important;
     }
 
-    /* Left panel: vertical stack on mobile */
     .left-panel {
-      flex-direction: column;
-      flex-wrap: nowrap;
-      align-items: flex-start;
-      gap: 6px;
-      padding: 12px 14px;
+      flex-direction: column !important;
+      flex-wrap: nowrap !important;
+      align-items: flex-start !important;
+      gap: 6px !important;
+      padding: 12px 14px !important;
     }
-    .left-panel::after { display: none; }
-    .day-num-badge { gap: 8px; }
-    .day-num { width: 30px; height: 30px; font-size: 12px; border-radius: 8px; }
-    .day-date { font-size: 11px; }
-    .day-title { font-size: 13px; margin-top: 1px; }
-    .city-flag { font-size: 10px; padding: 2px 8px; margin-top: 2px; }
+    .left-panel::after { display: none !important; }
+    .day-num-badge { gap: 8px !important; }
+    .day-num { width: 30px !important; height: 30px !important; font-size: 12px !important; border-radius: 8px !important; }
+    .day-date { font-size: 11px !important; }
+    .day-title { font-size: 13px !important; margin-top: 1px !important; }
+    .city-flag { font-size: 10px !important; padding: 2px 8px !important; margin-top: 2px !important; }
 
-    /* Transport tags: horizontal row */
     .left-transport {
-      margin-top: 2px; padding-top: 6px;
-      border-top: 1px dashed #eee;
-      flex-direction: row; flex-wrap: wrap; gap: 4px;
-      width: 100%;
+      margin-top: 2px !important; padding-top: 6px !important;
+      border-top: 1px dashed #eee !important;
+      flex-direction: row !important; flex-wrap: wrap !important; gap: 4px !important;
+      width: 100% !important;
     }
-    .transport-tag { font-size: 10px; padding: 2px 6px; }
+    .transport-tag { font-size: 10px !important; padding: 2px 6px !important; }
 
-    /* Right panel */
-    .right-panel { padding: 8px 14px 10px; }
+    .right-panel { padding: 8px 14px 10px !important; }
 
-    /* Slot: label above content */
     .slot {
-      grid-template-columns: 1fr;
-      gap: 1px;
-      padding: 7px 0;
+      grid-template-columns: 1fr !important;
+      gap: 1px !important;
+      padding: 7px 0 !important;
     }
     .slot-label {
-      font-size: 10px;
-      padding: 0;
-      text-align: left;
+      font-size: 10px !important;
+      padding: 0 !important;
+      text-align: left !important;
     }
     .slot-content {
-      font-size: 13px;
-      line-height: 1.55;
-      word-break: break-word;
-      overflow-wrap: break-word;
+      font-size: 13px !important;
+      line-height: 1.55 !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
     }
 
     .flight-tag {
-      font-size: 10px;
-      padding: 2px 6px;
-      margin: 2px 4px 2px 0;
+      font-size: 10px !important;
+      padding: 2px 6px !important;
+      margin: 2px 4px 2px 0 !important;
     }
 
-    /* Pending area */
-    .pending-right { padding: 16px 10px; font-size: 12px; }
-    .pending-right .pending-icon { font-size: 18px; }
+    .pending-right { padding: 16px 10px !important; font-size: 12px !important; }
+    .pending-right .pending-icon { font-size: 18px !important; }
 
-    /* Accommodation bar */
     .accom-bar {
-      padding: 8px 14px;
-      flex-wrap: wrap;
-      gap: 4px 8px;
-      font-size: 11px;
+      padding: 8px 14px !important;
+      flex-wrap: wrap !important;
+      gap: 4px 8px !important;
+      font-size: 11px !important;
     }
-    .accom-bar .accom-icon { font-size: 12px; }
-    .accom-bar .accom-label { font-size: 9px; }
-    .accom-bar .accom-name { font-size: 11px; }
-    .accom-bar .accom-hotel { font-size: 11px; }
+    .accom-bar .accom-icon { font-size: 12px !important; }
+    .accom-bar .accom-label { font-size: 9px !important; }
+    .accom-bar .accom-name { font-size: 11px !important; }
+    .accom-bar .accom-hotel { font-size: 11px !important; }
 
-    /* Collapsed summary */
-    .collapsed-summary { grid-column: 1; padding: 10px 14px; font-size: 11px; }
+    .collapsed-summary { grid-column: 1 !important; padding: 10px 14px !important; font-size: 11px !important; }
 
-    /* Collapse button */
     .collapse-btn {
-      width: 30px; height: 30px;
-      font-size: 13px;
-      top: 8px; right: 8px;
+      width: 30px !important; height: 30px !important;
+      font-size: 13px !important;
+      top: 8px !important; right: 8px !important;
     }
 
-    /* Tooltip: show on tap, position safely */
-    .spot { white-space: normal; border-bottom: 1px dashed #ccc; }
+    .spot { white-space: normal !important; border-bottom: 1px dashed #ccc !important; }
     .spot .tip {
-      position: fixed;
-      bottom: 10px; left: 10px; right: 10px;
-      top: auto;
-      width: auto;
-      transform: none;
-      font-size: 12px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      z-index: 9999;
+      position: fixed !important;
+      bottom: 10px !important; left: 10px !important; right: 10px !important;
+      top: auto !important;
+      width: auto !important;
+      transform: none !important;
+      font-size: 12px !important;
+      padding: 12px 14px !important;
+      border-radius: 10px !important;
+      z-index: 9999 !important;
     }
-    .spot .tip::after { display: none; }
-    .spot:active .tip { visibility: visible; opacity: 1; }
-    .spot:hover .tip { visibility: visible; opacity: 1; }
+    .spot .tip::after { display: none !important; }
+    .spot:active .tip { visibility: visible !important; opacity: 1 !important; }
+    .spot:hover .tip { visibility: visible !important; opacity: 1 !important; }
 
-    .section-divider { font-size: 12px; margin: 14px 0 6px; letter-spacing: 2px; }
+    .section-divider { font-size: 12px !important; margin: 14px 0 6px !important; letter-spacing: 2px !important; }
   }
+
+  /* ===== MOBILE-VIEW (JS fallback) ===== */
+  .mobile-view .header { padding: 24px 14px 20px !important; }
+  .mobile-view .header h1 { font-size: 20px !important; letter-spacing: 1px !important; }
+  .mobile-view .header .subtitle { font-size: 12px !important; }
+  .mobile-view .route-badges { gap: 6px !important; margin-top: 10px !important; }
+  .mobile-view .route-badge { font-size: 11px !important; padding: 3px 10px !important; }
+  .mobile-view .container { padding: 6px 6px 0 !important; }
+  .mobile-view .day-card {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    margin-bottom: 8px !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+  }
+  .mobile-view .left-panel {
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    padding: 12px 14px !important;
+  }
+  .mobile-view .left-panel::after { display: none !important; }
+  .mobile-view .day-num { width: 30px !important; height: 30px !important; font-size: 12px !important; border-radius: 8px !important; }
+  .mobile-view .day-date { font-size: 11px !important; }
+  .mobile-view .day-title { font-size: 13px !important; margin-top: 1px !important; }
+  .mobile-view .city-flag { font-size: 10px !important; padding: 2px 8px !important; margin-top: 2px !important; }
+  .mobile-view .left-transport {
+    margin-top: 2px !important; padding-top: 6px !important;
+    border-top: 1px dashed #eee !important;
+    flex-direction: row !important; flex-wrap: wrap !important; gap: 4px !important;
+    width: 100% !important;
+  }
+  .mobile-view .transport-tag { font-size: 10px !important; padding: 2px 6px !important; }
+  .mobile-view .right-panel { padding: 8px 14px 10px !important; }
+  .mobile-view .slot {
+    grid-template-columns: 1fr !important;
+    gap: 1px !important;
+    padding: 7px 0 !important;
+  }
+  .mobile-view .slot-label { font-size: 10px !important; padding: 0 !important; text-align: left !important; }
+  .mobile-view .slot-content { font-size: 13px !important; line-height: 1.55 !important; word-break: break-word !important; overflow-wrap: break-word !important; }
+  .mobile-view .flight-tag { font-size: 10px !important; padding: 2px 6px !important; margin: 2px 4px 2px 0 !important; }
+  .mobile-view .pending-right { padding: 16px 10px !important; font-size: 12px !important; }
+  .mobile-view .pending-right .pending-icon { font-size: 18px !important; }
+  .mobile-view .accom-bar { padding: 8px 14px !important; flex-wrap: wrap !important; gap: 4px 8px !important; font-size: 11px !important; }
+  .mobile-view .accom-bar .accom-icon { font-size: 12px !important; }
+  .mobile-view .accom-bar .accom-label { font-size: 9px !important; }
+  .mobile-view .accom-bar .accom-name { font-size: 11px !important; }
+  .mobile-view .accom-bar .accom-hotel { font-size: 11px !important; }
+  .mobile-view .collapsed-summary { grid-column: 1 !important; padding: 10px 14px !important; font-size: 11px !important; }
+  .mobile-view .collapse-btn { width: 30px !important; height: 30px !important; font-size: 13px !important; top: 8px !important; right: 8px !important; }
+  .mobile-view .spot { white-space: normal !important; }
+  .mobile-view .spot .tip {
+    position: fixed !important; bottom: 10px !important; left: 10px !important; right: 10px !important;
+    top: auto !important; width: auto !important; transform: none !important;
+    font-size: 12px !important; padding: 12px 14px !important; border-radius: 10px !important; z-index: 9999 !important;
+  }
+  .mobile-view .spot .tip::after { display: none !important; }
+  .mobile-view .section-divider { font-size: 12px !important; margin: 14px 0 6px !important; letter-spacing: 2px !important; }
 
   /* ===== PRINT ===== */
   @media print {
@@ -1080,6 +1130,18 @@
 </div><!-- /container -->
 
 <script>
+// Force mobile layout detection
+function checkMobile() {
+  if (window.innerWidth <= 768) {
+    document.documentElement.classList.add('mobile-view');
+  } else {
+    document.documentElement.classList.remove('mobile-view');
+  }
+}
+checkMobile();
+window.addEventListener('resize', checkMobile);
+window.addEventListener('orientationchange', function() { setTimeout(checkMobile, 100); });
+
 function toggleCard(btn) {
   const card = btn.closest('.day-card');
   card.classList.toggle('collapsed');
